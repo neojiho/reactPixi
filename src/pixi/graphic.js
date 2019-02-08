@@ -3,84 +3,89 @@ import {Graphics} from '@inlet/react-pixi'
 
 class Gr extends Component {
     constructor() {
-        super()
-    }
-    
-    onDragStart(event) {
-        if (!this.dragging) {
-            this.data = event.data;
-            this.alpha = 0.5;
-            this.dragging = true;
-            // this.scale.x *= 1.1;
-            // this.scale.y *= 1.1;
-            
-            this.dragPoint = event.data.getLocalPosition(this.parent);
-            console.log(event.data)
-            console.log("dragPoint", this.dragPoint);
-            console.log("thisPoint", this.x, this.y);
-            this.dragPoint.x -= this.x;
-            this.dragPoint.y -= this.y;
+        super();
+        this.state = {
+            x : 0,
+            y : 0
         }
     }
     
-    onDragEnd() {
-        this.alpha = 1;
-        this.dragging = false;
-        // this.scale.x /= 1.1;
-        // this.scale.y /= 1.1;
-        // set the interaction data to null
-        this.data = null;
-    }
-    
-    onDragMove() {
-        if (this.dragging) {
-            
-            var newPosition = this.data.getLocalPosition(this.parent);
-            
-            console.log(this.x, this.y, newPosition, this.dragPoint)
-            this.x = newPosition.x - this.dragPoint.x;
-            this.y = newPosition.y - this.dragPoint.y;
-        }
-    }
     
     render() {
+        const that = this;
+        const onDragStart = function(event){
+            if (!this.dragging) {
+                this.data = event.data;
+                this.alpha = 0.5;
+                this.dragging = true;
+                // this.scale.x *= 1.1;
+                // this.scale.y *= 1.1;
+                
+                this.dragPoint = event.data.getLocalPosition(this.parent);
+                // console.log(event.data)
+                // console.log("dragPoint", this.dragPoint);
+                // console.log("thisPoint", this.x, this.y);
+                this.dragPoint.x -= this.x;
+                this.dragPoint.y -= this.y;
+            }
+        },
+        onDragEnd = function(){
+            this.alpha = 1;
+            this.dragging = false;
+            // this.scale.x /= 1.1;
+            // this.scale.y /= 1.1;
+            // set the interaction data to null
+            this.data = null;
+        },
+        onDragMove = function(e) {
+            let width = this.graphicsData[0].shape.width,
+                height = this.graphicsData[0].shape.height;
+                
+            if (this.dragging) {
+                
+                var newPosition = this.data.getLocalPosition(this.parent);
+                //newPosition is coordinate of mouse pointer
+                
+                console.log(newPosition, this.dragPoint, this);
+                this.x = newPosition.x - this.dragPoint.x;
+                this.y = newPosition.y - this.dragPoint.y;
+                
+                
+                
+                that.setState({
+                    x : this.x + width / 2 ,
+                    y : this.y + height / 2
+                }, () => {
+                    that.props.getPosition.call(null, that.state)
+                })
+            }
+            
+            
+        };
+        
         return (
             <Graphics
                 draw={g => {
                     g.clear();
-                    // g.beginFill(0xff3300)
-                    // g.lineStyle(4, 0xffd900, 1)
-                    //
-                    // g.moveTo(50, 50)
-                    // g.lineTo(250, 50)
-                    // g.lineTo(100, 100)
-                    // g.lineTo(50, 50)
-                    // g.endFill()
-                    //
-                    // g.lineStyle(2, 0x0000ff, 1)
-                    // g.beginFill(0xff700b, 1)
-                    // g.drawRect(50, 250, 120, 120)
                     
                     g.lineStyle(2, 0xffffff, 1)
                     g.beginFill(0xcccccc, 0.25)
-                    g.drawRect(150, 250, 200, 100, 15)
+                    g.drawRect(0, 0, 100, 100, 1)
                     g.endFill()
                     
-                    // g.lineStyle(0)
-                    // g.beginFill(0xffff0b, 0.5)
-                    // g.drawCircle(470, 90, 60)
-                    // g.endFill()
                 }}
                 
                 interactive={true}
                 buttonMode={true}
+                visible={true}
                 
                 scale={{x : 1, y : 1}}
                 
-                mousedown={this.onDragStart}
-                mouseup={this.onDragEnd}
-                mouseupoutside={this.onDragEnd}
-                mousemove={this.onDragMove}
+                
+                mousedown={onDragStart}
+                mouseup={onDragEnd}
+                mouseupoutside={onDragEnd}
+                mousemove={onDragMove}
             
             >
             </Graphics>
