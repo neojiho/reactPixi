@@ -2,6 +2,12 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import PixiStage from './pixi/PixiStage'
+import Menu from './menu/Menu'
+
+import Counter from './components/Counter'
+import Buttons from './components/Buttons'
+import Option from './components/Option'
+
 
 class App extends Component {
     render() {
@@ -21,8 +27,13 @@ class App extends Component {
                         {/*Learn React*/}
                     {/*</a>*/}
                 {/*</header>*/}
-                <p>pixi example</p>
+                {/*<Counter />*/}
+                {/*<Option />*/}
+                {/*<Buttons />*/}
                 
+                
+                <p>pixi example</p>
+                <Menu />
                 <PixiStage />
             </div>
         );

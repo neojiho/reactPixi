@@ -41,6 +41,7 @@ class PixiStage extends Component {
                 {/*})}*/}
                 <Graphic getPosition={this.setStateData.bind(this)} />
                 <Graphic getPosition={this.setStateData2.bind(this)} />
+                <Graphic  />
                 
                 
                 {/*<Rectangle x={100}

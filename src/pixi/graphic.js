@@ -50,13 +50,11 @@ class Gr extends Component {
                 this.x = newPosition.x - this.dragPoint.x;
                 this.y = newPosition.y - this.dragPoint.y;
                 
-                
-                
                 that.setState({
                     x : this.x + width / 2 ,
                     y : this.y + height / 2
                 }, () => {
-                    that.props.getPosition.call(null, that.state)
+                    if (that.props.getPosition) that.props.getPosition.call(null, that.state)
                 })
             }
             
