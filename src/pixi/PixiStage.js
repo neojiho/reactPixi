@@ -1,14 +1,16 @@
 import React, {Component} from "react";
-import {Graphics, Stage} from '@inlet/react-pixi'
-import {Bunny, Graphic, Rectangle, Line, Snake} from './index'
-
-const arr = [1, 2, 3];
+import './PixiStage.scss'
+import {Stage} from '@inlet/react-pixi'
+import {Bunny, Rectangle, Line, Snake} from './index'
 
 class PixiStage extends Component {
     
     constructor() {
         super();
         this.state = {
+            RectangleList : ['r1', 'r2', 'r3'],
+            TriangleList : [],
+            CircleList : [],
             lineStartX : 0,
             lineStartY : 0,
             lineEndX : 0,
@@ -35,26 +37,26 @@ class PixiStage extends Component {
     
     render() {
         return (
-            <Stage width={800} height={800} options={{backgroundColor : 0x012b30}}>
-                {/*{arr.map((v, i, a) => {*/}
-                    {/*return <Graphic key={i} />*/}
-                {/*})}*/}
-                <Graphic getPosition={this.setStateData.bind(this)} />
-                <Graphic getPosition={this.setStateData2.bind(this)} />
-                <Graphic  />
+            <Stage className={'PixiStageWrap'} width={800} height={800} options={{backgroundColor : 0x012b30}}>
                 
                 
-                {/*<Rectangle x={100}
-                           y={100}
-                           width={100}
-                           height={100}
-                           fill={0xffffff}
+                {this.state.RectangleList.map((v, i)=>{
+                    return <Rectangle id={`${v}_id`} attr1={`${v}_attr1`} attr2={`${v}_attr2`} attr3={`${v}_attr3`} attr4={`${v}_attr4`}
+                           getPosition={this.setStateData.bind(this)}
+                           clickFunc={this.props.clickFunc}
+                           key={`${v}_key`}
+                    />
+                })}
                 
-                           click={(e) => {
-                               // console.log(this.refs.line)
-                               this.setState({lineStartX : 50, lineStartY: 50})
-                           }}
-                />*/}
+                <Rectangle id={"rect1"} attr1={"rect1_a1"} attr2={"rect1_a2"} attr3={'rect1_a3'} attr4={'rect1_a4'}
+                    getPosition={this.setStateData.bind(this)}
+                    clickFunc={this.props.clickFunc}
+                />
+                <Rectangle id={"rect2"} attr1={"rect2_a1"} attr2={"rect2_a2"} attr3={'rect2_a3'} attr4={'rect2_a4'}
+                    getPosition={this.setStateData2.bind(this)}
+                    clickFunc={this.props.clickFunc}
+                />
+                
                 
                 <Line ref={'line'}
                       draw={this.lineDraw.bind(this)}

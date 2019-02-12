@@ -1,7 +1,6 @@
-import Bunny from './bunny'
-import Graphic from './graphic'
-import Rectangle from './rectangle'
-import Line from './line'
+import Bunny from './Bunny'
+import Rectangle from './Rectangle'
+import Line from './Line'
 import Snake from './Rope'
 
-export {Bunny, Graphic, Rectangle, Line, Snake}
+export {Bunny, Rectangle, Line, Snake}

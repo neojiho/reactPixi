@@ -5,6 +5,7 @@
   "dependencies": {
     "@inlet/react-pixi": "^0.4.3",
     "mermaid": "^8.0.0",
+    "node-sass": "^4.11.0",
     "pixi.js": "^4.8.5",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",

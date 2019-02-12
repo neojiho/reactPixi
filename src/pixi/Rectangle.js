@@ -4,13 +4,27 @@ import {Graphics} from '@inlet/react-pixi'
 class Gr extends Component {
     constructor() {
         super();
+        
         this.state = {
             x : 0,
-            y : 0
+            y : 0,
+            id : '',
+            attr1 : '',
+            attr2 : '',
+            attr3 : '',
+            attr4 : ''
         }
     }
     
-    
+    componentWillMount(){
+        this.setState({
+            id : this.props.id,
+            attr1 : this.props.attr1,
+            attr2 : this.props.attr2,
+            attr3 : this.props.attr3,
+            attr4 : this.props.attr4
+        })
+    }
     render() {
         const that = this;
         const onDragStart = function(event){
@@ -59,7 +73,8 @@ class Gr extends Component {
             }
             
             
-        };
+        }
+        
         
         return (
             <Graphics
@@ -84,6 +99,8 @@ class Gr extends Component {
                 mouseup={onDragEnd}
                 mouseupoutside={onDragEnd}
                 mousemove={onDragMove}
+                
+                click={this.props.clickFunc.bind(null , {...that.state})}
             
             >
             </Graphics>

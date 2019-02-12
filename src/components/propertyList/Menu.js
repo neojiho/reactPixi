@@ -11,8 +11,9 @@ class Menu extends Component {
     render(){
         return (
             <div>
-                <button type="button"> rect </button>
-                <button type="button"> triangle </button>
+                <button type="button" onClick={void(0)}> rectangle </button>
+                <button type="button" onClick={void(0)}> triangle </button>
+                <button type="button" onClick={void(0)}> circle </button>
             </div>
         )
     }
