@@ -19,6 +19,7 @@ class PixiStage extends Component {
     }
     
     setStateData(state){
+        console.log(state)
         this.setState({lineStartX : state.x, lineStartY : state.y})
     }
     setStateData2(state){

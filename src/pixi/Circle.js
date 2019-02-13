@@ -8,6 +8,7 @@ class Gr extends Component {
         this.state = {
             x : 0,
             y : 0,
+            radius : 0,
             id : '',
             attr1 : '',
             attr2 : '',
@@ -25,6 +26,9 @@ class Gr extends Component {
             attr4 : this.props.attr4
         })
     }
+    
+    
+    
     render() {
         const that = this;
         const onDragStart = function(event){
@@ -41,6 +45,9 @@ class Gr extends Component {
                 // console.log("thisPoint", this.x, this.y);
                 this.dragPoint.x -= this.x;
                 this.dragPoint.y -= this.y;
+                
+                //set radius
+                that.setState({radius : this.graphicsData[0].shape.radius})
             }
         },
         onDragEnd = function(){
@@ -52,28 +59,26 @@ class Gr extends Component {
             this.data = null;
         },
         onDragMove = function(e) {
-            let width = this.graphicsData[0].shape.width,
-                height = this.graphicsData[0].shape.height;
-                
+            
             if (this.dragging) {
                 
                 var newPosition = this.data.getLocalPosition(this.parent);
                 //newPosition is coordinate of mouse pointer
                 
-                console.log(newPosition, this.dragPoint, this);
+                console.log(newPosition, this.dragPoint);
                 this.x = newPosition.x - this.dragPoint.x;
                 this.y = newPosition.y - this.dragPoint.y;
                 
                 that.setState({
-                    x : this.x + width / 2 ,
-                    y : this.y + height / 2
+                    x : this.x,
+                    y : this.y
                 }, () => {
                     if (that.props.getPosition) that.props.getPosition.call(null, that.state)
                 })
             }
             
             
-        }
+        };
         
         
         return (
