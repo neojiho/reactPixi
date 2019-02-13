@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import './PixiStage.scss'
 import {Stage} from '@inlet/react-pixi'
-import {Bunny, Rectangle, Triangle, Line, Snake} from './index'
+import {Bunny, Rectangle, Triangle, Circle, Line, Snake} from './index'
 
 class PixiStage extends Component {
     
@@ -50,6 +50,14 @@ class PixiStage extends Component {
                 
                 {this.state.TriangleList.map((v, i)=>{
                     return <Triangle id={`${v}_id`} attr1={`${v}_attr1`} attr2={`${v}_attr2`} attr3={`${v}_attr3`} attr4={`${v}_attr4`}
+                           getPosition={this.setStateData.bind(this)}
+                           clickFunc={this.props.clickFunc}
+                           key={`${v}_key`}
+                    />
+                })}
+                
+                {this.state.CircleList.map((v, i)=>{
+                    return <Circle id={`${v}_id`} attr1={`${v}_attr1`} attr2={`${v}_attr2`} attr3={`${v}_attr3`} attr4={`${v}_attr4`}
                            getPosition={this.setStateData.bind(this)}
                            clickFunc={this.props.clickFunc}
                            key={`${v}_key`}
