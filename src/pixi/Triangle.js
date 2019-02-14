@@ -108,7 +108,13 @@ class Gr extends Component {
                 mouseupoutside={onDragEnd}
                 mousemove={onDragMove}
                 
+                touchstart={onDragStart}
+                touchend={onDragEnd}
+                touchendoutside={onDragEnd}
+                touchmove={onDragMove}
+                
                 click={this.props.clickFunc.bind(null , {...that.state})}
+                tap={this.props.clickFunc.bind(null , {...that.state})}
             
             >
             </Graphics>
